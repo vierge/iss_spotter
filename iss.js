@@ -21,7 +21,7 @@ const fetchCoordsByIP = (ip, callback) => {
 };
   
 const fetchISSFlyOverTimes = (coords, callback) => {
-  request(`http://api.open-notify.org/iss-pass.json?${coords[0]}&lon=${coords[1]}`, (error, response, body) => {
+  request(`http://api.open-notify.org/iss-pass.json?lat=${coords[0]}&lon=${coords[1]}`, (error, response, body) => {
     error ? callback(error, null) :
       response.statusCode !== 200 ? callback(`${response.statusCode} error`, null) :
         callback(null, JSON.parse(body).response);
