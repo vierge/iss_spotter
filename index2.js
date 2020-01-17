@@ -1,7 +1,8 @@
-const { ipFetch, coordsFetch, flyOverFetch, ISSPassTimes } = require('./iss_promised');
+const { getLocalISSTimes } = require('./iss_promised');
 
 
-ipFetch()
-  .then(ip => coordsFetch(ip))
-  .then(coords => flyOverFetch(coords))
-  .then(flyOvers => ISSPassTimes(flyOvers))
+getLocalISSTimes()
+  .then(data => console.log(data))
+  .catch(error => {
+    console.log('IT DIDNT WORK :\'< details:   ', error.message);
+  });

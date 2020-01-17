@@ -15,11 +15,26 @@ const flyOverFetch = (coords) => {
 }
 
 const ISSPassTimes = (flyOvers) => {
+  const list = [];
   flyOvers = JSON.parse(flyOvers).response;
   for(let element of flyOvers) {
   let passTime = new Date(element.risetime*1000);
-  console.log(`Next pass at ${passTime.toLocaleString()} for ${element.duration} seconds!`);
+  list.push(`Next pass at ${passTime.toLocaleString()} for ${element.duration} seconds!`);
   }
+  return list;
 }
 
-module.exports = { ipFetch, coordsFetch, flyOverFetch, ISSPassTimes };
+const getLocalISSTimes = () => {
+  return ipFetch()
+  .then(coordsFetch)
+  .then(flyOverFetch)
+  .then(ISSPassTimes)
+  .then((data) => {
+    const response = data;
+    return response;
+  });
+}
+
+
+
+module.exports = { getLocalISSTimes };
